@@ -10,9 +10,25 @@ public class CharacterController : MonoBehaviour
     private Rigidbody rb;
 
     //Variables
-    public int MoveSpeed;
-    public int RotateSpeed;
-    public int JumpForce;
+
+        //Velocidad de movimiento
+        public int MoveSpeed;
+
+        //Velocidad de giro
+        public int RotateSpeed;
+
+        //Fuerza del salto
+        public int JumpForce;
+
+        //Velociades del Dash
+        private float dashTime;
+        public float dashSpeed;
+        public float startDashTime;
+
+        // Efecto del dash
+        public GameObject dashEffect;
+
+    
 
 
 
@@ -30,6 +46,7 @@ public class CharacterController : MonoBehaviour
         Move();
         Rotate();
         Jump();
+        Dash();
 
         
 
@@ -85,5 +102,29 @@ public class CharacterController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Space) && feed.is_grouned) rb.AddForce((Vector3.up * JumpForce), ForceMode.Impulse);
         
+    }
+
+    private void Dash()
+    {
+
+        // Dash solo hacia delante
+
+        if (dashTime <= 0)
+        {
+            dashTime = startDashTime;
+        }
+
+        else
+        {
+
+            if (Input.GetKey(KeyCode.RightControl))
+            {
+                // Instanciar efecto
+                Instantiate(dashEffect, transform.position, Quaternion.identity);
+                rb.AddForce(this.transform.forward * dashSpeed, ForceMode.Impulse);
+
+            }
+        }
+
     }
 }

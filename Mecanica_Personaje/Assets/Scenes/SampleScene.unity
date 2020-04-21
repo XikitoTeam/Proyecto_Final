@@ -571,3 +571,6 @@ MonoBehaviour:
   MoveSpeed: 5
   RotateSpeed: 180
   JumpForce: 2
+  dashSpeed: 2
+  startDashTime: 0.1
+  dashEffect: {fileID: 0}
